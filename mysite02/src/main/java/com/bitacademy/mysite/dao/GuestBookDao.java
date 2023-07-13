@@ -20,7 +20,7 @@ public class GuestBookDao {
 		try {
 			conn = getConnection();
 			
-			String sql = "insert into guestbook values (null,?,password(?),?,curdate())";
+			String sql = "insert into guestbook values (null,?,password(?),?,now())";
 			
 			pstmt = conn.prepareStatement(sql);
 			
