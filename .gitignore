@@ -1,0 +1,39 @@
+## Mac
+**/.DS_Store
+
+## JavaScript Project
+**/node_modules
+**/public/bundle.js
+**/public/main.js
+**/public/assets
+
+## Maven/Gradle
+**/target
+**/.gradle/
+**/settings
+**/build/
+**/out
+
+## STS/Eclipse IDE
+**/.apt_generated
+**/.classpath
+**/.mvn
+**/.factorypath
+**/.project
+**/.settings
+**/.springBeans
+**/.sts4-cache
+
+## IntelliJ IDE
+**/.idea
+**/*.iws
+**/*.iml
+**/*.ipr
+
+## VS Code IDE
+**/.vscode
+**/.suo
+**/.ntvs*
+**/.njsproj
+**/.sln
+**/.sw?
