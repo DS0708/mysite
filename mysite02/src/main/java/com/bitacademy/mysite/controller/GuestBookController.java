@@ -18,11 +18,9 @@ public class GuestBookController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String actionName = request.getParameter("a");
 		
-		//System.out.println(actionName);
+		
 		
 		if("insert".equals(actionName)){
-			//System.out.println("insert");
-			
 			String name = request.getParameter("name");
 			String password = request.getParameter("pass");
 			String text = request.getParameter("content");
@@ -43,8 +41,12 @@ public class GuestBookController extends HttpServlet {
 			
 			response.sendRedirect(request.getContextPath()+"/guestbook");
 		}
+		else if("deleteform".equals(actionName)){
+			
+			request.setAttribute("no", request.getParameter("no"));
+			request.getRequestDispatcher("WEB-INF/views/guestbook/deleteform.jsp").forward(request, response);
+		}
 		else {
-			System.out.println("else");
 			List<GuestBookVo> list = new GuestBookDao().findAll();
 			
 			request.setAttribute("list", list);

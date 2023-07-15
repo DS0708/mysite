@@ -111,10 +111,11 @@ public class UserController extends HttpServlet {
 			UserDao dao = new UserDao();
 			
 			boolean check = dao.update(authUser);
-			
 			if(!check) System.out.println("update error");
 			
-			request.setAttribute("vo",authUser);
+			
+			
+			request.setAttribute("vo",dao.findByNo(authUser.getNo()));
 			request
 			.getRequestDispatcher("WEB-INF/views/user/updateform.jsp")
 			.forward(request, response);

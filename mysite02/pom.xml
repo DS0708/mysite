@@ -11,11 +11,21 @@
 	<packaging>war</packaging>
 	
 	<dependencies>
+		
+		<!-- MariaDB JDBC -->
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
 			<version>3.0.8</version>
 		</dependency>
+		
+		<!-- JSTL -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
 	</dependencies>
 
 	<properties>
