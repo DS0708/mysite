@@ -104,21 +104,6 @@ public class UserDao {
 		}
 		return result;
 	}
-	
-	private Connection getConnection() throws SQLException {
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-
-			e.printStackTrace();
-		}
-		
-		String url = "jdbc:mariadb://192.168.0.153:3306/webdb?charset=utf8";	
-	
-		
-		return DriverManager.getConnection(url,"webdb","webdb");
-		
-	}
 
 
 	public UserVo findByEmailAndPassword(String email, String password) {
@@ -251,6 +236,22 @@ public class UserDao {
 		}
 		
 		return result;
+	}
+	
+	private Connection getConnection() throws SQLException {
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+
+			e.printStackTrace();
+		}
+		
+		//String url = "jdbc:mariadb://192.168.0.153:3306/webdb?charset=utf8";
+		String url = "jdbc:mariadb://192.168.0.12:3306/webdb?charset=utf8";
+	
+		
+		return DriverManager.getConnection(url,"webdb","webdb");
+		
 	}
 	
 }

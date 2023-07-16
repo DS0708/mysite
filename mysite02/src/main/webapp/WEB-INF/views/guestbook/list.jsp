@@ -23,7 +23,7 @@
 			<div id="guestbook">
 				<form action="${pageContext.request.contextPath }/guestbook"
 					method="post">
-					<input type="hidden" name="a" value="insert">
+					<input type="hidden" name="a" value="add">
 					<table>
 						<tr>
 							<td>이름</td>

@@ -35,16 +35,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>GuestBookController</display-name>
-    <servlet-name>GuestBookController</servlet-name>
-    <servlet-class>com.bitacademy.mysite.controller.GuestBookController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GuestBookController</servlet-name>
-    <url-pattern>/guestbook</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>BoardController</display-name>
     <servlet-name>BoardController</servlet-name>
     <servlet-class>com.bitacademy.mysite.controller.BoardController</servlet-class>
@@ -52,5 +42,15 @@
   <servlet-mapping>
     <servlet-name>BoardController</servlet-name>
     <url-pattern>/board</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GuestBookController</display-name>
+    <servlet-name>GuestBookController</servlet-name>
+    <servlet-class>com.bitacademy.mysite.controller.GuestBookController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GuestBookController</servlet-name>
+    <url-pattern>/guestbook</url-pattern>
   </servlet-mapping>
 </web-app>

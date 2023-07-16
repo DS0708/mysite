@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bitacademy.mysite.dao.GuestBookDao;
 import com.bitacademy.mysite.vo.GuestBookVo;
 
+
 public class GuestBookController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -19,8 +20,7 @@ public class GuestBookController extends HttpServlet {
 		String actionName = request.getParameter("a");
 		
 		
-		
-		if("insert".equals(actionName)){
+		if("add".equals(actionName)){
 			String name = request.getParameter("name");
 			String password = request.getParameter("pass");
 			String text = request.getParameter("content");
@@ -55,9 +55,8 @@ public class GuestBookController extends HttpServlet {
 		}
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		doGet(request, response);
 	}
 
 }
