@@ -9,6 +9,6 @@ vo = (UserVo)session.getAttribute("authUser"); */
 			<ul>
 				<li><a href="<%=request.getContextPath() %>">신동성</a></li>
 				<li><a href="<%=request.getContextPath() %>/guestbook">방명록</a></li>
-				<li><a href="<%=request.getContextPath() %>/board">게시판</a></li>
+				<li><a href="<%=request.getContextPath() %>/board?c=1">게시판</a></li>
 			</ul>
 		</div>

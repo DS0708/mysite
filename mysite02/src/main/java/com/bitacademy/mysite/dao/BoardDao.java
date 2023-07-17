@@ -61,24 +61,6 @@ public class BoardDao {
 		
 		return result;
 	}
-	
-	
-	
-	private Connection getConnection() throws SQLException {
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-
-			e.printStackTrace();
-		}
-		
-		//String url = "jdbc:mariadb://192.168.0.153:3306/webdb?charset=utf8";
-		String url = "jdbc:mariadb://192.168.0.12:3306/webdb?charset=utf8";
-	
-		
-		return DriverManager.getConnection(url,"webdb","webdb");
-		
-	}
 
 
 
@@ -241,6 +223,58 @@ public class BoardDao {
 		}
 		return result;
 	}
+	
+	public boolean addHit(Long no) {
+		boolean result = false;
+		Connection conn = null;
+		PreparedStatement auto_pstmt = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			
+			String sql = "update board\n"
+					+ "set hit = hit+1\n"
+					+ "where no = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setLong(1, no);
+			
+			int count = pstmt.executeUpdate();
+			
+			result = count ==1 ;
+			
+		} catch (SQLException e) {
+			System.out.println("Error"+e);
+		} finally {
+			try {
+				if(conn!=null)	conn.close();
+				if(auto_pstmt!=null)	auto_pstmt.close();
+				if(pstmt!=null)	pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	private Connection getConnection() throws SQLException {
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+
+			e.printStackTrace();
+		}
+		
+		//String url = "jdbc:mariadb://192.168.0.153:3306/webdb?charset=utf8";
+		String url = "jdbc:mariadb://192.168.0.12:3306/webdb?charset=utf8";
+	
+		
+		return DriverManager.getConnection(url,"webdb","webdb");
+		
+	}
+
 
 
 }

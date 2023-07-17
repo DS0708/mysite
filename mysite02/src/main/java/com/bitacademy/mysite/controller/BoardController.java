@@ -37,7 +37,7 @@ public class BoardController extends HttpServlet {
 			boolean check = new BoardDao().insert(vo);
 			if(!check) System.out.println("insert error");
 			
-			response.sendRedirect(request.getContextPath()+"/board");
+			response.sendRedirect(request.getContextPath()+"/board?c=1");
 		}else if("writeform".equals(actionName)) {
 			request.getRequestDispatcher("WEB-INF/views/board/writeform.jsp").forward(request, response);
 		}else if("modifyform".equals(actionName)) {
@@ -65,14 +65,21 @@ public class BoardController extends HttpServlet {
 			Long no = Long.parseLong(request.getParameter("no"));
 			BoardVo vo = new BoardDao().findByNo(no);
 			
+			new BoardDao().addHit(no);
+			
 			request.setAttribute("vo", vo);
 			request.getRequestDispatcher("WEB-INF/views/board/view.jsp").forward(request, response);
 		}
 		else {
 			List<BoardVo> list = new BoardDao().findAll();
 			
+			int c = 1;
+			if(request.getParameter("c") != null) {
+				c = Integer.parseInt(request.getParameter("c"));
+			}
+			
 			request.setAttribute("list", list);
-			request.getRequestDispatcher("/WEB-INF/views/board/list.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/board/list.jsp?c="+c).forward(request, response);
 		}
 	}
 
