@@ -13,16 +13,23 @@ spring:
          
    # mvc
    mvc:
+      static-path-pattern: /assets/**   #/assets/ 로 오는 모든 요청은 classpath:/assets/에서 찾겠다.
+      throw-exception-if-no-handler-found: true
       view:
          prefix: /WEB-INF/views
          suffix: .jsp
+         
+   web:
+      resources:
+         static-locations: classpath:/assets/
+         
    # aop      
    aop:
       auto: true
       proxy-target-class: true
       
    datasource:
-      driver-class-name: org.mariadb.hdbc.Driver
+      driver-class-name: org.mariadb.jdbc.Driver
       url: jdbc:mariadb://192.168.0.12:3306/webdb?charset=utf8
       username: webdb
       password: webdb
