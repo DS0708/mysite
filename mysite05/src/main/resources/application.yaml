@@ -1,0 +1,64 @@
+#https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties.cache
+#에서 찾기
+
+# spring configuration
+spring:
+   application:
+      name: mysite
+      
+   # devtools - live reload
+   devtools:
+      livereload:
+         enabled: true
+         
+   # mvc
+   mvc:
+      view:
+         prefix: /WEB-INF/views
+         suffix: .jsp
+   # aop      
+   aop:
+      auto: true
+      proxy-target-class: true
+      
+   datasource:
+      driver-class-name: org.mariadb.hdbc.Driver
+      url: jdbc:mariadb://192.168.0.12:3306/webdb?charset=utf8
+      username: webdb
+      password: webdb
+      hikari:
+         minimum-idle: 10
+         maximum-pool: 20
+# mybatis
+mybatis:
+   config-location: classpath:mybatis/configuration.xml
+
+# server
+server:
+   port: 8080
+   servlet:
+      context-path: /mysite05
+      charset: utf-8
+      enabled: true
+      
+# logging
+logging:
+   pattern:
+      file: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n"
+      console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n"
+   logback:
+      rollingpolicy:
+         file-name-pattern: /Users/ds/logex/${spring.application.name}05.%i.log.zip
+         max-file-size: 200MB
+         max-history: 10
+   file: /Users/ds/logex/${spring.application.name}05.log
+   level:
+      root: INFO
+      com:
+         bitacademy:
+            mysite:
+               exception: ERROR
+         
+         
+         
+         
