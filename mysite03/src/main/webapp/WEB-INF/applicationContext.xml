@@ -12,9 +12,31 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
-	<context:annotation-config />
+	<!-- auto proxy -->
+	<aop:aspectj-autoproxy />	
+	
+	<!-- Connection Pool DataSource-->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+		<!-- 153 or 12 -->
+		<property name="url" value="jdbc:mariadb://192.168.0.153:3306/webdb?charset=utf8" />
+		<property name="username" value="webdb" />
+		<property name="password" value="webdb" />
+	</bean>
 
-	<context:component-scan base-package="com.bitacademy.mysite.repository">
+	<!-- MyBatis SqlSessionFactoryBean --> 
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+		<property name="dataSource" ref="dataSource" /> 
+		<property name="configLocation" value="classpath:mybatis/configuration.xml" /> 
+	</bean>
+
+	<!-- MyBatis SqlSessionTemplate --> 
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.bitacademy.mysite.service, com.bitacademy.mysite.repository, com.bitacademy.mysite.exception, com.bitacademy.mysite.aop">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />
 		<context:include-filter type="annotation"

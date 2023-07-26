@@ -10,16 +10,76 @@
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- validator, conversionService, messageConverter 등록 -->
-	<mvc:annotation-driven />
+	<!-- auto proxy -->
+	<aop:aspectj-autoproxy />
+
+	<!-- validator, conversionService, messageConverter, ArgumentResolver 등록 -->
+	<mvc:annotation-driven>
+		<!-- Message Converters -->
+		<mvc:message-converters>
+			<!-- String type에 대한 한글 나오는 설정 -->
+			<bean
+				class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			<!-- String을 제외한 객체를 JSON으로 바꿔서 처리 -->
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+
+		<!-- Argument Resolver -->
+		<mvc:argument-resolvers>
+			<bean
+				class="com.bitacademy.mysite.security.AuthUserHandlerMethodArgumentResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
 
 	<!-- 서블릿 컨테이너의 디폴트 서블릿 위임 핸들러 -->
 	<mvc:default-servlet-handler />
-	
+
+	<!-- Interceptros -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/user/auth" />
+			<mvc:exclude-mapping path="/user/logout" />
+			<mvc:exclude-mapping path="/assets/**" />
+			<bean class="com.bitacademy.mysite.security.AuthInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/auth" />
+			<bean class="com.bitacademy.mysite.security.LoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/user/logout" />
+			<bean class="com.bitacademy.mysite.security.LogoutInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- ViewResolver 설정 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="1" />
+	</bean>
+
 	<!-- 여기를 보고 저 페키지에 가서 @Controller를 찾아 생성 -->
 	<context:annotation-config />
 	<context:component-scan
 		base-package="com.bitacademy.mysite.controller" />
-	
+
 
 </beans>

@@ -1,0 +1,26 @@
+[src/main/java]
+	com
+	 |--- bitacademy
+	 |		|--- mysite	
+	 |		|	|--- config
+	 |		|	|		|--- AppConfig.java
+	 |		|	|		|--- WebConfig.java
+	 |		|	|		|--- app
+	 |		|	|   	|	  |--- DBConfig.java
+	 |		|	|   	|	  |--- MyBatisConfig.java
+	 |		|	|		|--- web
+	 |		|	|     	|	  |--- MvcConfig.java
+	 |		|	|     	|	  |--- SecurityConfig.java
+	 |		|	|     	|     |--- MessageResourceConfig.java
+	 |		|	|     	|	  |--- FileuploadConfig.java
+	 |		|	|--- controller
+	 |		|	|--- service
+	 |		|	|--- repository
+
+[src/main/resources]
+	|--- jdbc.properties
+	|--- mybatis
+	|		|--- configuration.xml
+	|--- mappers
+			|--- board.xml
+			|--- user.xml
